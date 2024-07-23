@@ -18,13 +18,17 @@ function createWindow() {
   });
 
   mainWindow.once('ready-to-show', () => {
-    mainWindow.show();
+    mainWindow.show()
+    //Somente para abrir devtool
+    mainWindow.webContents.openDevTools()
   });
 
   if (process.env.NODE_ENV === 'development' && process.env.ELECTRON_RENDERER_URL) {
     mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+    const file = mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
+    // Mostrar caminho que abriu arquivo
+    console.log(`File: ${file}`)
   }
 }
 
