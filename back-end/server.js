@@ -1,4 +1,4 @@
-import express, {json} from 'express'
+import express, { json } from 'express'
 import cors from 'cors'
 
 import cliente from './config/db.js'
@@ -27,7 +27,26 @@ server.get('/', async (req, res) => {
                 date: formatDate(row.date),
             }
         })
-        res.json(formattedResult) 
+        res.json(formattedResult)
+    }
+
+    catch (ex) {
+        console.log(ex)
+    }
+})
+
+server.post('/listForDate', async (req, res) => {
+    const {date} = req.body
+
+    try {
+        const resultado = await cliente.query('SELECT * FROM requestsmonth WHERE date = $1', [date]) //Para mais de um valor, usar BETWEEN
+        const formattedResult = resultado.rows.map(row => {
+            return {
+                ...row,
+                date: formatDate(row.date)
+            }
+        })
+        res.json(formattedResult)
     }
 
     catch(ex) {
@@ -35,48 +54,67 @@ server.get('/', async (req, res) => {
     }
 })
 
+server.post('/listForName', async (req, res) => {
+    const { product } = req.body
+
+    try {
+        const resultado = await cliente.query("SELECT * FROM requestsmonth WHERE product = $1", [product])
+        const formattedResult = resultado.rows.map(row => {
+            return {
+                ...row,
+                date: formatDate(row.date)
+            }
+        })
+        res.json(formattedResult)
+    } 
+    
+    catch (ex) {
+        console.log(ex)
+    }
+})
+
 server.post('/requests', async (req, res) => {
-    const {product, price, date} = req.body
+    const { product, price, date } = req.body
 
     try {
         await insRequests(product, price, date)
 
-        const newProduct = {id, product, price, date}
+        const newProduct = { id, product, price, date }
         produtos.push(newProduct)
 
-        res.status(201).json({'message': 'Sucessfully'})
+        res.status(201).json({ 'message': 'Sucessfully' })
     }
 
-    catch(error) {
+    catch (error) {
         res.status(500).json(error)
     }
 })
 
 server.delete('/delrequests', async (req, res) => {
-    const {id} = req.body
+    const { id } = req.body
 
     // Caso, com a conexão com o front-end, os valores forem considerados strings, adicionar a conversão aqui!!!!
     try {
         await delRequests(id)
 
-        res.status(201).json({'message': 'Sucessfully'})
+        res.status(201).json({ 'message': 'Sucessfully' })
     }
 
-    catch(error) {
+    catch (error) {
         res.status(500).json(error)
     }
 })
 
 server.put('/upprice', async (req, res) => {
-    const {id, price} = req.body
+    const { id, price } = req.body
 
     try {
         await upRequests(id, price)
 
-        res.status(201).json({'message': 'Sucessfully'})
+        res.status(201).json({ 'message': 'Sucessfully' })
     }
 
-    catch(error) {
+    catch (error) {
         res.status(500).json(error)
     }
 })

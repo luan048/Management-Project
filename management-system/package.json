@@ -20,7 +20,10 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
-    "electron-updater": "^6.1.7"
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "electron-updater": "^6.1.7",
+    "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

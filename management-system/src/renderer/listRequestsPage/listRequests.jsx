@@ -1,13 +1,12 @@
 import React from "react";
 
-import Menupages from "../menu/menuPages";
-import Footer from "../footer/Footer";
+import Siderbar from "../sidebar/sidebar.jsx";
 
 import './listRequests.css'
 
 function Listrequests() {
     return (
-        <Menupages />
+        <Siderbar />
     )
 }
 

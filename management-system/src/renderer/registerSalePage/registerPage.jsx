@@ -1,12 +1,14 @@
 import React from "react";
 
-import Menupages from "../menu/menuPages";
+import Siderbar from "../sidebar/sidebar.jsx";
 
 import './registerPage.css'
 
 function Registerpage() {
     return (
-        <Menupages />
+        <>
+            <Siderbar />
+        </>
     )
 }
 
