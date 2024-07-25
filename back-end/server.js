@@ -8,8 +8,9 @@ import { insRequests, delRequests, upRequests } from './controllers/requestsCont
 
 const server = express()
 
+// Disponibiliza o acesso a esse localhost
 const corsOrigin = {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:5173',
     optionsSucessStatus: 200
 }
 

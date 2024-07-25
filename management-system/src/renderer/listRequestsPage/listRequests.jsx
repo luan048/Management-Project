@@ -28,15 +28,30 @@ function Listrequests() {
                 <Siderbar />
 
                 <div className="bodyListRequests">
-                    {products.map(product => (
-                        <div key={product.id}>
-                            <i className="productId">{product.id}</i>
-                            <i className="productName">{product.product}</i>
-                            <i className="priceProduct">{product.price}</i>
-                            <i className="dateProduct">{product.date}</i>
+                    <table>
+                        <div className="theadProducts">
+                            <div className="trTitle">
+                                <p>ID</p>
+                                <p>Produto</p>
+                                <p>Preço</p>
+                                <p>Data</p>
+                            </div>
                         </div>
-                    ))}
+
+                        <div className="tbodyProducts">
+                            {products.map(product => (
+                                <tr key={product.id}>
+                                    <td>{product.id}</td>
+                                    <td>{product.product}</td>
+                                    <td>{product.price}</td>
+                                    <td>{product.date}</td>
+                                </tr>
+                            ))}
+                        </div>
+                        
+                    </table>
                 </div>
+                
             </div>
         </>
     )
