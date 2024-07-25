@@ -12,9 +12,9 @@ function createWindow() {
     icon: join(__dirname, '../../build/icon.ico'), // Esse é o responsável pelo seu ícone
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
     }
-  });
+  })
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
