@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron'
+import { app, BrowserWindow, screen} from 'electron'
 import { join } from 'path'
 
 function createWindow() {

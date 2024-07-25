@@ -8,13 +8,13 @@ import { insRequests, delRequests, upRequests } from './controllers/requestsCont
 
 const server = express()
 
-// const corsOrigin = {
-//     origin: 'http://localhost:3000',
-//     optionsSucessStatus: 200
-// }
+const corsOrigin = {
+    origin: 'http://localhost:3000',
+    optionsSucessStatus: 200
+}
 
 server.use(express.json())
-server.use(cors())
+server.use(cors(corsOrigin))
 
 const produtos = []
 
