@@ -1,16 +1,16 @@
 import cliente from "../config/db.js";
 
-export async function insRequests(product, price, date) {
+export async function insRequests(client, product, price, date) {
     try {
         const productId = Math.floor(1000 + Math.random() * 9000)
 
-        await cliente.query('INSERT INTO requestsmonth ("id", "product", "price", "date") VALUES ($1, $2, $3, $4)', [productId, product, price, date])
+        await cliente.query('INSERT INTO requestsmonth ("id", "client", "product", "price", "date") VALUES ($1, $2, $3, $4, $5)', [productId, client,product, price, date])
 
         console.log('Inserido')
     }
 
     catch(ex) {
-        console.log(ex)
+        console.log('error controller: '+ex)
     }
 }
 
@@ -22,7 +22,7 @@ export async function delRequests(id) {
     }
 
     catch(ex) {
-        console.log(ex)
+        console.log('error controller: '+ex)
     }
 }
 
@@ -34,6 +34,6 @@ export async function upRequests(id, price) {
     }
 
     catch(ex) {
-        console.log(ex)
+        console.log('error controller: '+ex)
     }
 }

@@ -32,9 +32,11 @@ server.get('/', async (req, res) => {
     }
 
     catch (ex) {
-        console.log(ex)
+        console.log('error server: '+ex)
     }
 })
+
+//SEARCH
 
 server.post('/listForDate', async (req, res) => {
     const {date} = req.body
@@ -51,15 +53,15 @@ server.post('/listForDate', async (req, res) => {
     }
 
     catch(ex) {
-        console.log(ex)
+        console.log('error server'+ex)
     }
 })
 
 server.post('/listForName', async (req, res) => {
-    const { product } = req.body
+    const { client } = req.body
 
     try {
-        const resultado = await cliente.query("SELECT * FROM requestsmonth WHERE product = $1", [product])
+        const resultado = await cliente.query("SELECT * FROM requestsmonth WHERE client = $1", [client])
         const formattedResult = resultado.rows.map(row => {
             return {
                 ...row,
@@ -70,24 +72,26 @@ server.post('/listForName', async (req, res) => {
     } 
     
     catch (ex) {
-        console.log(ex)
+        console.log('error server: '+ex)
     }
 })
 
+//Fim do SEARCH
+
 server.post('/requests', async (req, res) => {
-    const { product, price, date } = req.body
+    const { client, product, price, date } = req.body
 
     try {
-        await insRequests(product, price, date)
+        await insRequests(client,product, price, date)
 
-        const newProduct = { id, product, price, date }
+        const newProduct = { id, client, product, price, date }
         produtos.push(newProduct)
 
         res.status(201).json({ 'message': 'Sucessfully' })
     }
 
-    catch (error) {
-        res.status(500).json(error)
+    catch (ex) {
+        console.log('error server'+ ex)
     }
 })
 
@@ -101,8 +105,8 @@ server.delete('/delrequests', async (req, res) => {
         res.status(201).json({ 'message': 'Sucessfully' })
     }
 
-    catch (error) {
-        res.status(500).json(error)
+    catch (ex) {
+        console.log('error server'+ ex)
     }
 })
 
@@ -115,8 +119,8 @@ server.put('/upprice', async (req, res) => {
         res.status(201).json({ 'message': 'Sucessfully' })
     }
 
-    catch (error) {
-        res.status(500).json(error)
+    catch (ex) {
+        console.log('error server'+ ex)
     }
 })
 
