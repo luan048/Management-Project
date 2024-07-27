@@ -1,25 +1,31 @@
 .elementsListRequests {
     display: flex;
+    justify-content: center;
 }
 
 /*Inicio do Title*/
 
-.accordion {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.accordions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     margin: auto;
+    width: 100%;
 }
 
 .div-accordion-title {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     cursor: pointer;
-    background-color: #eee;
+    background-color: red;
     border: 1px solid #ccc;
     border-bottom: none;
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
+    overflow: hidden;
 }
+
 
 .accordion-title {
     font-family: 'Karl', sans-serif;
@@ -38,12 +44,23 @@
     background-color: #fafafa;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    max-height: 0;
+    opacity: 0;
+    box-sizing: border-box;
+}
+
+.accordion-content.expanded {
+    max-height: 500px;
+    opacity: 1;
+    margin-bottom: 13px;
 }
 
 .trTitle th {
     padding: 10px;
     background-color: #f9f9f9;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; 
 }
 
 /*Fim do Thead*/
@@ -52,7 +69,7 @@
 
 .tbodyProducts {
     font-family: 'Karla', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .tbodyProducts td {
@@ -60,6 +77,9 @@
     padding-left: 33px;
     border-bottom: 1px solid #eee;
     border-right: 1px solid #eee;
+    /*Caso seja maior que 200px, os elementos td vão quebrar*/
+    overflow: hidden;
+    max-width: 200px;
 }
 
 /*Fim do Body da Listagem*/
