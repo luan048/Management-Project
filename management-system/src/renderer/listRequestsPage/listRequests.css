@@ -1,89 +1,89 @@
 .elementsListRequests {
     display: flex;
-    justify-content: center;
 }
-
-/*Inicio do Title*/
-
 .accordions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
     margin: auto;
-    width: 100%;
+    margin-top: 10rem;
 }
 
+/*Title do accordion*/
 .div-accordion-title {
     width: 100%;
-    max-width: 500px;
     cursor: pointer;
-    background-color: red;
-    border: 1px solid #ccc;
+    background-color: #eee;
+    border: 1px solid black;
     border-bottom: none;
     display: flex;
     justify-content: space-between;
-    box-sizing: border-box;
-    overflow: hidden;
+    padding: 15px;
 }
-
 
 .accordion-title {
-    font-family: 'Karl', sans-serif;
+    font-family: 'Karla', sans-serif;
     font-weight: bold;
-    margin: 25px;
 }
+/*Fim do title*/
 
-/*Fim do Title*/
-
-/*Inicio do Thead*/
-
+/*Conteúdo do Accordion*/
 .accordion-content {
+    width: 100%;
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-top: none;
-    background-color: #fafafa;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
     max-height: 0;
     opacity: 0;
-    box-sizing: border-box;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    background-color: white;
 }
 
 .accordion-content.expanded {
-    max-height: 500px;
+    max-height: none; /*Para não limitar a listagem*/
     opacity: 1;
-    margin-bottom: 13px;
+    margin-bottom: 15px;
 }
 
+/*Titulo das colunas*/
 .trTitle th {
     padding: 10px;
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #ccc; 
+    border-bottom: 1px solid #ccc;
 }
+/*Fim do Titulo colunas*/
 
-/*Fim do Thead*/
-
-/*Body da listagem*/
-
+/*Colunas*/
 .tbodyProducts {
     font-family: 'Karla', sans-serif;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .tbodyProducts td {
-    padding: 10px;
-    padding-left: 33px;
+    padding: 5px;
     border-bottom: 1px solid #eee;
     border-right: 1px solid #eee;
-    /*Caso seja maior que 200px, os elementos td vão quebrar*/
+    max-width: 150px;
     overflow: hidden;
-    max-width: 200px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+/*Fim das colunas*/
+
+.totalPriceMonth {
+    font-family: 'Karla', sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+    float: right;
+    margin-top: 10px;
 }
 
-/*Fim do Body da Listagem*/
-
-.fa-caret-down, .fa-caret-up {
-    margin: 25px;
+.mensgFault {
+    display: flex;
+    justify-content: center;
+    font-family: 'Karla', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    
 }

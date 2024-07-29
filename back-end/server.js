@@ -38,25 +38,6 @@ server.get('/', async (req, res) => {
 
 //SEARCH
 
-server.post('/listForDate', async (req, res) => {
-    const {date} = req.body
-
-    try {
-        const resultado = await cliente.query('SELECT * FROM requestsmonth WHERE date = $1', [date]) //Para mais de um valor, usar BETWEEN
-        const formattedResult = resultado.rows.map(row => {
-            return {
-                ...row,
-                date: formatDate(row.date)
-            }
-        })
-        res.json(formattedResult)
-    }
-
-    catch(ex) {
-        console.log('error server'+ex)
-    }
-})
-
 server.post('/listForName', async (req, res) => {
     const { client } = req.body
 
@@ -84,7 +65,7 @@ server.post('/requests', async (req, res) => {
     try {
         await insRequests(client,product, price, date)
 
-        const newProduct = { id, client, product, price, date }
+        const newProduct = {client, product, price, date }
         produtos.push(newProduct)
 
         res.status(201).json({ 'message': 'Sucessfully' })

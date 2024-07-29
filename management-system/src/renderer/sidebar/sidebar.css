@@ -8,6 +8,18 @@
   padding: 10px;
 }
 
+.siderbar.fixed {
+  width: 14%;
+  height: 100vh;
+  background-color: #a9d2e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  position: fixed;
+}
+
+/*Body Sidebar*/
 .conteudo-sidebar {
   display: flex;
   flex-direction: column;
@@ -28,7 +40,7 @@
   cursor: pointer;
 }
 
-.btn-cadastrar, .btn-visualizar {
+.btn-cadastrar, .btn-visualizar, .btn-materiais, .btn-desempenho {
   width: 90%;
   max-width: 90%;
   height: 30px;
@@ -46,6 +58,7 @@
   text-overflow: ellipsis; /*Adiciona ... para o que foi oculto*/
 }
 
-.btn-cadastrar:hover, .btn-visualizar:hover {
+.btn-cadastrar:hover, .btn-visualizar:hover, .btn-materiais:hover, .btn-desempenho:hover {
   color: black;
 }
+/*Fim do Body Sidebar*/

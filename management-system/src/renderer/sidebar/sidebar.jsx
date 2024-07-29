@@ -8,7 +8,7 @@ import logoMenu from '../../public/logoMenu.jpg'
 
 import './sidebar.css'
 
-function Siderbar() {
+function Siderbar({fixed}) {
 
     const navigate = useNavigate()
 
@@ -25,12 +25,14 @@ function Siderbar() {
     }
     
     return (
-        <div className="siderbar">
+        <div className={`siderbar ${fixed ? 'fixed' : ''}`}>
             <img src={logoMenu} className="logoMenu" />
             <FontAwesomeIcon icon={faHouse} className="faHouse" onClick={homePage} />
             <div className="conteudo-sidebar">
                 <button className="btn-cadastrar" onClick={registerPage}>Cadastrar Vendas</button>
                 <button className="btn-visualizar" onClick={listPage} >Visualizar Vendas Totais</button>
+                <button className="btn-materiais">Cadastrar Materiais</button>
+                <button className="btn-desempenho">Visualizar Desempenho</button>
             </div>
         </div>
     )
