@@ -40,7 +40,10 @@
   cursor: pointer;
 }
 
-.btn-cadastrar, .btn-visualizar, .btn-materiais, .btn-desempenho {
+.btn-cadastrar, 
+.btn-visualizar, 
+.btn-materiais, 
+.btn-desempenho {
   width: 90%;
   max-width: 90%;
   height: 30px;
@@ -58,7 +61,11 @@
   text-overflow: ellipsis; /*Adiciona ... para o que foi oculto*/
 }
 
-.btn-cadastrar:hover, .btn-visualizar:hover, .btn-materiais:hover, .btn-desempenho:hover {
+.btn-cadastrar:hover, 
+.btn-visualizar:hover, 
+.btn-materiais:hover, 
+.btn-desempenho:hover {
   color: black;
 }
+
 /*Fim do Body Sidebar*/

@@ -7,7 +7,7 @@ import './listRequests.css'
 
 const api = axios.create({
     baseURL: 'http://localhost:3000'
-});
+})
 
 function Listrequests() {
     const [products, setProducts] = useState([])
