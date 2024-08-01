@@ -31,6 +31,7 @@ html, body {
 .msg-saudacao {
   padding-bottom: 35px;
   font-family: 'Karla', sans-serif;
+  color: black;
 }
 
 .img-fundo {

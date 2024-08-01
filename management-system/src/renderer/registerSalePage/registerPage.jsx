@@ -21,7 +21,7 @@ function Registerpage() {
         api.get('/')
             .then(response => setProducts(response.data))
             .catch(error => console.log(error))
-    })
+    }, [])
 
     //Formata Price
     const formatedPrice = (event) => {

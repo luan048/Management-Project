@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.bodyRegister {
+.bodyPurchase {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,11 +11,11 @@
     width: 70%;
 }
 
-.bodyRegister h1 {
+.bodyPurchase h1 {
     color: #a9d2e8;
 }
 
-.elementsInput {
+.elements {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 4rem;
@@ -23,7 +23,6 @@
 }
 
 /*Body General*/
-
 .inputGroup {
     display: flex;
     flex-direction: column;
@@ -35,36 +34,20 @@
     margin-bottom: 15px;
 }
 
-.inputClient, 
-.inputProduct, 
-.inputPrice, 
+.inputMaterial, 
+.inputPreco, 
+.inputQuantity, 
 .inputDate {
     outline: none;
     border-radius: 10px;
     border: 1px solid #ccc;
 }
 
-.inputClient:focus, 
-.inputProduct:focus, 
-.inputPrice:focus, 
+.inputMaterial:focus, 
+.inputPreco:focus, 
+.inputQuantity:focus, 
 .inputDate:focus { /*Borda black enquanto esteja selecionado*/
     border: 1px solid black;
 }
 
-.button {
-    width: 50%;
-    height: 40px;
-    margin: auto;
-    margin-top: 80px;
-    cursor: pointer;
-    border-radius: 10px;
-    border: none;
-    background-color: #b56985;
-    font-weight: bold;
-}
-
-.button:hover {
-    color: white;
-}
-
-/*Fim do Body*/
+/*Fim Body General*/

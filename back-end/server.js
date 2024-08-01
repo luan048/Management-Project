@@ -5,6 +5,7 @@ import cliente from './config/db.js'
 import formatDate from './utils/formatterDate.js'
 
 import { insRequests, delRequests, upRequests } from './controllers/requestsController.js'
+import { insPurchases, delPurchases } from './controllers/purchasesController.js'
 
 const server = express()
 
@@ -18,7 +19,10 @@ server.use(express.json())
 server.use(cors(corsOrigin))
 
 const produtos = []
+const purchases = []
 
+
+//SERVER PARA VENDAS
 server.get('/', async (req, res) => {
     try {
         const resultado = await cliente.query('SELECT * FROM requestsmonth')
@@ -104,6 +108,60 @@ server.put('/upprice', async (req, res) => {
         console.log('error server'+ ex)
     }
 })
+
+//FIM DO SERVER VENDAS
+
+//SERVER PARA REGISTRO DE COMPRA DE PRODUTOS
+
+server.get('/purchases', async (req, res) => {
+
+    try {
+        const resultado = await cliente.query("SELECT * FROM purchasesmonth")
+        const formattedResult = resultado.rows.map(row => {
+            return  {
+                ...row,
+                date: formatDate(row.date)
+            }
+        })
+        res.json(formattedResult)
+    }
+
+    catch(ex) {
+        console.log('error server: ' +ex)
+    }
+})
+
+server.post('/insertPurchases',  async(req, res) => {
+    const {nameproduct, price, quantity, date} = req.body
+    try {
+        await insPurchases(nameproduct, price, quantity, date)
+
+        const newPurchase = {nameproduct, price, quantity, date}
+        purchases.push(newPurchase)
+
+        res.status(201).json({'message': 'Sucessfully'})
+    }
+
+    catch(ex) {
+        console.log('error server: ' +ex)
+    }
+})
+
+server.delete('/delPurchases', async(req, res) => {
+    const {id} = req.body
+
+    try {
+        await delPurchases(id)
+
+        res.status(201).json({'message': 'Sucessfully'})
+    }
+
+    catch(ex) {
+        console.log('error server: '+ex)
+    }
+})
+
+//FIM DO SERVER PRODUTOS
 
 process.on('SIGTERM', async () => {
     console.log('Fechando Servidor...')

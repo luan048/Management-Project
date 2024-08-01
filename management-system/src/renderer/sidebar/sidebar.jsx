@@ -24,6 +24,14 @@ function Siderbar({fixed}) {
         navigate('/registerPage')
     }
 
+    const purchasePage = () => {
+        navigate('/purchasePage')
+    }
+
+    const performaceMonth = () => {
+        navigate('/performaceMonth')
+    }
+
     
     return (
         <div className={`siderbar ${fixed ? 'fixed' : ''}`}>
@@ -32,8 +40,8 @@ function Siderbar({fixed}) {
             <div className="conteudo-sidebar">
                 <button className="btn-cadastrar" onClick={registerPage}>Cadastrar Vendas</button>
                 <button className="btn-visualizar" onClick={listPage} >Visualizar Vendas Totais</button>
-                <button className="btn-materiais">Cadastrar Materiais</button>
-                <button className="btn-desempenho">Visualizar Desempenho</button>
+                <button className="btn-materiais" onClick={purchasePage} >Cadastrar Materiais</button>
+                <button className="btn-desempenho" onClick={performaceMonth} >Visualizar Desempenho</button>
             </div>
         </div>
     )

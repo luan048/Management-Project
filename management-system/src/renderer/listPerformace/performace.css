@@ -1,0 +1,10 @@
+.containerPerformace {
+    display: flex;
+}
+
+.bodyPerformace {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 10rem;
+}

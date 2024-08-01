@@ -49,7 +49,7 @@ function Listrequests() {
         const totalPriceMonth = filteredProducts.reduce((total, product) => {
             const priceString = product.price ? product.price.replace('R$', '').replace('.', '').replace(',', '.').trim() : '0'
             const price = parseFloat(priceString) || 0
-    
+
             return total + price
         }, 0).toFixed(2)
 
@@ -64,7 +64,7 @@ function Listrequests() {
                     )}
                 </div>
                 <div className={`accordion-content ${expandedMonth === month ? 'expanded' : ''}`}>
-                    
+
                     <table style={{ display: filteredProducts.length === 0 ? 'none' : 'block' }}>
                         <thead className="theadProducts">
                             <tr className="trTitle">
@@ -101,7 +101,9 @@ function Listrequests() {
     return (
         <div className="elementsListRequests">
             <Siderbar fixed={true} />
+
             <div className="accordions">
+                <article className="ghost"></article>
                 {renderAccordion(1, 'Vendas Janeiro')}
                 {renderAccordion(2, 'Vendas Fevereiro')}
                 {renderAccordion(3, 'Vendas Março')}
