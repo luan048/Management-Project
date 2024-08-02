@@ -7,7 +7,15 @@ import formatDate from './utils/formatterDate.js'
 import { insRequests, delRequests, upRequests } from './controllers/requestsController.js'
 import { insPurchases, delPurchases } from './controllers/purchasesController.js'
 
+import { RequestsValidation } from './middleware/requestsValidation.js'
+import { PurchasesValidation } from './middleware/purchasesValidation.js'
+import { SearchValidation } from './middleware/searchValidation.js'
+
 const server = express()
+
+const instanceRequestValidation = new RequestsValidation()
+const instancePurchaseValidation = new PurchasesValidation()
+const instanceSearchValidation = new SearchValidation()
 
 // Disponibiliza o acesso a esse localhost
 const corsOrigin = {
@@ -42,7 +50,7 @@ server.get('/', async (req, res) => {
 
 //SEARCH
 
-server.post('/listForName', async (req, res) => {
+server.post('/listForName', instanceSearchValidation.searchRequest, async (req, res) => {
     const { client } = req.body
 
     try {
@@ -63,7 +71,7 @@ server.post('/listForName', async (req, res) => {
 
 //Fim do SEARCH
 
-server.post('/requests', async (req, res) => {
+server.post('/requests', instanceRequestValidation.createRequestValidation, async (req, res) => {
     const { client, product, price, date } = req.body
 
     try {
@@ -80,7 +88,7 @@ server.post('/requests', async (req, res) => {
     }
 })
 
-server.delete('/delrequests', async (req, res) => {
+server.delete('/delrequests', instanceRequestValidation.deleteRequestValidation, async (req, res) => {
     const { id } = req.body
 
     // Caso, com a conexão com o front-end, os valores forem considerados strings, adicionar a conversão aqui!!!!
@@ -95,7 +103,7 @@ server.delete('/delrequests', async (req, res) => {
     }
 })
 
-server.put('/upprice', async (req, res) => {
+server.put('/upprice', instanceRequestValidation.updateRequestsValidation, async (req, res) => {
     const { id, price } = req.body
 
     try {
@@ -131,7 +139,7 @@ server.get('/purchases', async (req, res) => {
     }
 })
 
-server.post('/insertPurchases',  async(req, res) => {
+server.post('/insertPurchases',  instancePurchaseValidation.createPurchaseValidation, async(req, res) => {
     const {nameproduct, price, quantity, date} = req.body
     try {
         await insPurchases(nameproduct, price, quantity, date)
@@ -147,7 +155,7 @@ server.post('/insertPurchases',  async(req, res) => {
     }
 })
 
-server.delete('/delPurchases', async(req, res) => {
+server.delete('/delPurchases', instancePurchaseValidation.deletePurchaseValidation, async(req, res) => {
     const {id} = req.body
 
     try {

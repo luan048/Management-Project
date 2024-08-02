@@ -18,8 +18,7 @@ function createWindow() {
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
-    // Somente para abrir DevTools
-    mainWindow.webContents.openDevTools();
+    
   });
 
   if (process.env.NODE_ENV === 'development' && process.env.ELECTRON_RENDERER_URL) {

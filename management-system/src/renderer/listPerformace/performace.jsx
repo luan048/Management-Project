@@ -62,7 +62,7 @@ function Performacemonth() {
             return total + price
         }, 0).toFixed(2)
 
-        const profitOfMonth = (parseFloat(totalSalesMonth) || 0) - (parseFloat(calculatePurchases) || 0)
+        const profitOfMonth = ((parseFloat(totalSalesMonth) || 0) - (parseFloat(calculatePurchases) || 0)).toFixed(2)
 
         return (
             <div className="section" key={month}>
