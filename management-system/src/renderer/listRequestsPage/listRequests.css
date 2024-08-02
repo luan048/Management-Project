@@ -1,97 +1,82 @@
 .elementsListRequests {
     display: flex;
 }
-.accordions {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 10rem;
-}
 
 .ghost {
-    width: 26.6%;
+    width: 100%;
     height: 290px;
     position: fixed;
     background-color: white;
     margin-top: -300px;
 }
 
-/*Title do accordion*/
+.accordions {
+    font-family: 'Karla', sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 10rem;
+}
+
 .div-accordion-title {
-    width: 100%;
-    cursor: pointer;
-    background-color: #b56985;
-    border: 1px solid black;
-    border-bottom: none;
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.div-accordion-title:hover {
+    background: #e0e7ff;
 }
 
 .accordion-title {
-    font-family: 'Karla', sans-serif;
     font-weight: bold;
+    font-size: 25px;
+    color: #a9d2e8;
 }
-/*Fim do title*/
 
-/*Conteúdo do Accordion*/
 .accordion-content {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid black;
-    border-top: none;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
     max-height: 0;
-    opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-    background-color: white;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
 }
 
 .accordion-content.expanded {
-    max-height: none; /*Para não limitar a listagem*/
-    opacity: 1;
-    margin-bottom: 15px;
+    max-height: 500px;
 }
 
-/*Titulo das colunas*/
-.trTitle th {
+.accordion-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.accordion-content th, .accordion-content td {
     padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-/*Fim do Titulo colunas*/
-
-/*Colunas*/
-.tbodyProducts {
-    font-family: 'Karla', sans-serif;
-    font-size: 10px;
-}
-
-.tbodyProducts td {
-    padding: 5px;
-    border-bottom: 1px solid #eee;
-    border-right: 1px solid #eee;
+    border: 1px solid #ccc;
+    text-align: left;
+    width: 150px;
     max-width: 150px;
-    overflow: hidden;
-    white-space: normal;
     word-wrap: break-word;
+    overflow-wrap: break-word;
 }
-/*Fim das colunas*/
 
 .totalPriceMonth {
-    font-family: 'Karla', sans-serif;
     font-weight: bold;
-    font-size: 10px;
-    float: right;
-    margin-top: 10px;
+    font-size: 16px;
+    display: block;
+    margin: 10px 0;
 }
 
 .mensgFault {
-    display: flex;
-    justify-content: center;
-    font-family: 'Karla', sans-serif;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 12px;
-    color: black;
+    color: #b56985;
+    text-align: center;
 }
