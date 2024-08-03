@@ -1,4 +1,4 @@
-import express, { json } from 'express'
+import express from 'express'
 import cors from 'cors'
 
 import cliente from './config/db.js'
