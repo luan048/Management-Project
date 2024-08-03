@@ -42,7 +42,7 @@
   },
   "build": {
     "appId": "com.example.managementsystem",
-    "productName": "ManagementSystem",
+    "productName": "SonhosPersonalizados",
     "directories": {
       "output": "dist"
     },

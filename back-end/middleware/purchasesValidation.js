@@ -2,7 +2,7 @@ export class PurchasesValidation {
 
     async createPurchaseValidation(req, res, next) {
         const { nameproduct, price, quantity, date } = req.body
-        const fields = []
+        const fields = ["nameproduct", "price", "quantity", "date"]
         const erros = []
 
         for (const field of fields) {

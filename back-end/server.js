@@ -14,8 +14,9 @@ import { SearchValidation } from './middleware/searchValidation.js'
 const server = express()
 
 const instanceRequestValidation = new RequestsValidation()
-const instancePurchaseValidation = new PurchasesValidation()
 const instanceSearchValidation = new SearchValidation()
+
+const instancePurchaseValidation = new PurchasesValidation()
 
 // Disponibiliza o acesso a esse localhost
 const corsOrigin = {
