@@ -10,8 +10,6 @@ import { insPurchases, delPurchases } from './controllers/purchasesController.js
 import { RequestsValidation } from './middleware/requestsValidation.js'
 import { PurchasesValidation } from './middleware/purchasesValidation.js'
 import { SearchValidation } from './middleware/searchValidation.js'
-import pkg from 'pg/lib/defaults.js'
-const { host, port } = pkg
 
 const server = express()
 
@@ -20,14 +18,10 @@ const instanceSearchValidation = new SearchValidation()
 
 const instancePurchaseValidation = new PurchasesValidation()
 
-// Disponibiliza o acesso a esse localhost
-const corsOrigin = {
-    origin: 'http://localhost:5173',
-    optionsSucessStatus: 200
-}
-
 server.use(express.json())
-server.use(cors(corsOrigin))
+server.use(cors())
+
+const port = process.env.PORT || 4000
 
 const produtos = []
 const purchases = []
@@ -176,9 +170,6 @@ process.on('SIGTERM', async () => {
     process.exit(0)
 })
 
-server.listen({
-    host: '0.0.0.0',
-    port: process.env.PORT ? Number(process.env.PORT) : 3000
-}).then(() => {
-    console.log('Server Running')
+server.listen(port, () => {
+    console.log(`In the port ${port}`)
 })
