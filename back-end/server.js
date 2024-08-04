@@ -10,7 +10,8 @@ import { insPurchases, delPurchases } from './controllers/purchasesController.js
 import { RequestsValidation } from './middleware/requestsValidation.js'
 import { PurchasesValidation } from './middleware/purchasesValidation.js'
 import { SearchValidation } from './middleware/searchValidation.js'
-import { host, port } from 'pg/lib/defaults.js'
+import pkg from 'pg/lib/defaults.js'
+const { host, port } = pkg
 
 const server = express()
 
@@ -43,15 +44,14 @@ server.get('/', async (req, res) => {
             }
         })
         res.json(formattedResult)
-    }
-
+    } 
+    
     catch (ex) {
         console.log('error server: '+ex)
     }
 })
 
 //SEARCH
-
 server.post('/listForName', instanceSearchValidation.searchRequest, async (req, res) => {
     const { client } = req.body
 
@@ -72,7 +72,6 @@ server.post('/listForName', instanceSearchValidation.searchRequest, async (req, 
 })
 
 //Fim do SEARCH
-
 server.post('/requests', instanceRequestValidation.createRequestValidation, async (req, res) => {
     const { client, product, price, date } = req.body
 
@@ -83,8 +82,8 @@ server.post('/requests', instanceRequestValidation.createRequestValidation, asyn
         produtos.push(newProduct)
 
         res.status(201).json({ 'message': 'Sucessfully' })
-    }
-
+    } 
+    
     catch (ex) {
         console.log('error server'+ ex)
     }
@@ -98,8 +97,8 @@ server.delete('/delrequests', instanceRequestValidation.deleteRequestValidation,
         await delRequests(id)
 
         res.status(201).json({ 'message': 'Sucessfully' })
-    }
-
+    } 
+    
     catch (ex) {
         console.log('error server'+ ex)
     }
@@ -112,8 +111,8 @@ server.put('/upprice', instanceRequestValidation.updateRequestsValidation, async
         await upRequests(id, price)
 
         res.status(201).json({ 'message': 'Sucessfully' })
-    }
-
+    } 
+    
     catch (ex) {
         console.log('error server'+ ex)
     }
@@ -122,9 +121,7 @@ server.put('/upprice', instanceRequestValidation.updateRequestsValidation, async
 //FIM DO SERVER VENDAS
 
 //SERVER PARA REGISTRO DE COMPRA DE PRODUTOS
-
 server.get('/purchases', async (req, res) => {
-
     try {
         const resultado = await cliente.query("SELECT * FROM purchasesmonth")
         const formattedResult = resultado.rows.map(row => {
@@ -134,8 +131,8 @@ server.get('/purchases', async (req, res) => {
             }
         })
         res.json(formattedResult)
-    }
-
+    } 
+    
     catch(ex) {
         console.log('error server: ' +ex)
     }
@@ -150,8 +147,8 @@ server.post('/insertPurchases',  instancePurchaseValidation.createPurchaseValida
         purchases.push(newPurchase)
 
         res.status(201).json({'message': 'Sucessfully'})
-    }
-
+    } 
+    
     catch(ex) {
         console.log('error server: ' +ex)
     }
@@ -164,15 +161,12 @@ server.delete('/delPurchases', instancePurchaseValidation.deletePurchaseValidati
         await delPurchases(id)
 
         res.status(201).json({'message': 'Sucessfully'})
-    }
-
-    catch(ex) {
+    } catch(ex) {
         console.log('error server: '+ex)
     }
 })
 
 //FIM DO SERVER PRODUTOS
-
 process.on('SIGTERM', async () => {
     console.log('Fechando Servidor...')
 
@@ -184,7 +178,7 @@ process.on('SIGTERM', async () => {
 
 server.listen({
     host: '0.0.0.0',
-    port: process.env.PORT ? Number(produtos.env.PORT) : 3000
+    port: process.env.PORT ? Number(process.env.PORT) : 3000
 }).then(() => {
     console.log('Server Running')
 })
