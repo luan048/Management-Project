@@ -10,6 +10,7 @@ import { insPurchases, delPurchases } from './controllers/purchasesController.js
 import { RequestsValidation } from './middleware/requestsValidation.js'
 import { PurchasesValidation } from './middleware/purchasesValidation.js'
 import { SearchValidation } from './middleware/searchValidation.js'
+import { host, port } from 'pg/lib/defaults.js'
 
 const server = express()
 
@@ -182,5 +183,8 @@ process.on('SIGTERM', async () => {
 })
 
 server.listen({
-    port: 3000
+    host: '0.0.0.0',
+    port: process.env.PORT ? Number(produtos.env.PORT) : 3000
+}).then(() => {
+    console.log('Server Running')
 })
