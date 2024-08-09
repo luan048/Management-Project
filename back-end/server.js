@@ -1,11 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 
-import cliente from './config/db.js'
+import {prismaClient} from './config/db.js'
 import formatDate from './utils/formatterDate.js'
 
-import { insRequests, delRequests, upRequests } from './controllers/requestsController.js'
-import { insPurchases, delPurchases } from './controllers/purchasesController.js'
+// import { insRequests, delRequests, upRequests } from './controllers/requestsController.js'
+// import { insPurchases, delPurchases } from './controllers/purchasesController.js'
 
 import { RequestsValidation } from './middleware/requestsValidation.js'
 import { PurchasesValidation } from './middleware/purchasesValidation.js'
@@ -21,16 +21,16 @@ const instancePurchaseValidation = new PurchasesValidation()
 server.use(express.json())
 server.use(cors())
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT ?? 4000
 
-const produtos = []
-const purchases = []
+// const produtos = []
+// const purchases = []
 
 
 //SERVER PARA VENDAS
 server.get('/', async (req, res) => {
     try {
-        const resultado = await cliente.query('SELECT * FROM requestsmonth')
+        const resultado = await prismaClient.requestsMonth.findMany()
         const formattedResult = resultado.rows.map(row => {
             return {
                 ...row,
@@ -46,119 +46,119 @@ server.get('/', async (req, res) => {
 })
 
 //SEARCH
-server.post('/listForName', instanceSearchValidation.searchRequest, async (req, res) => {
-    const { client } = req.body
+// server.post('/listForName', instanceSearchValidation.searchRequest, async (req, res) => {
+//     const { client } = req.body
 
-    try {
-        const resultado = await cliente.query("SELECT * FROM requestsmonth WHERE client = $1", [client])
-        const formattedResult = resultado.rows.map(row => {
-            return {
-                ...row,
-                date: formatDate(row.date)
-            }
-        })
-        res.json(formattedResult)
-    } 
+//     try {
+//         const resultado = await cliente.query("SELECT * FROM requestsmonth WHERE client = $1", [client])
+//         const formattedResult = resultado.rows.map(row => {
+//             return {
+//                 ...row,
+//                 date: formatDate(row.date)
+//             }
+//         })
+//         res.json(formattedResult)
+//     } 
     
-    catch (ex) {
-        console.log('error server: '+ex)
-    }
-})
+//     catch (ex) {
+//         console.log('error server: '+ex)
+//     }
+// })
 
-//Fim do SEARCH
-server.post('/requests', instanceRequestValidation.createRequestValidation, async (req, res) => {
-    const { client, product, price, date } = req.body
+// //Fim do SEARCH
+// server.post('/requests', instanceRequestValidation.createRequestValidation, async (req, res) => {
+//     const { client, product, price, date } = req.body
 
-    try {
-        await insRequests(client,product, price, date)
+//     try {
+//         await insRequests(client,product, price, date)
 
-        const newProduct = {client, product, price, date }
-        produtos.push(newProduct)
+//         const newProduct = {client, product, price, date }
+//         produtos.push(newProduct)
 
-        res.status(201).json({ 'message': 'Sucessfully' })
-    } 
+//         res.status(201).json({ 'message': 'Sucessfully' })
+//     } 
     
-    catch (ex) {
-        console.log('error server'+ ex)
-    }
-})
+//     catch (ex) {
+//         console.log('error server'+ ex)
+//     }
+// })
 
-server.delete('/delrequests', instanceRequestValidation.deleteRequestValidation, async (req, res) => {
-    const { id } = req.body
+// server.delete('/delrequests', instanceRequestValidation.deleteRequestValidation, async (req, res) => {
+//     const { id } = req.body
 
-    // Caso, com a conexão com o front-end, os valores forem considerados strings, adicionar a conversão aqui!!!!
-    try {
-        await delRequests(id)
+//     // Caso, com a conexão com o front-end, os valores forem considerados strings, adicionar a conversão aqui!!!!
+//     try {
+//         await delRequests(id)
 
-        res.status(201).json({ 'message': 'Sucessfully' })
-    } 
+//         res.status(201).json({ 'message': 'Sucessfully' })
+//     } 
     
-    catch (ex) {
-        console.log('error server'+ ex)
-    }
-})
+//     catch (ex) {
+//         console.log('error server'+ ex)
+//     }
+// })
 
-server.put('/upprice', instanceRequestValidation.updateRequestsValidation, async (req, res) => {
-    const { id, price } = req.body
+// server.put('/upprice', instanceRequestValidation.updateRequestsValidation, async (req, res) => {
+//     const { id, price } = req.body
 
-    try {
-        await upRequests(id, price)
+//     try {
+//         await upRequests(id, price)
 
-        res.status(201).json({ 'message': 'Sucessfully' })
-    } 
+//         res.status(201).json({ 'message': 'Sucessfully' })
+//     } 
     
-    catch (ex) {
-        console.log('error server'+ ex)
-    }
-})
+//     catch (ex) {
+//         console.log('error server'+ ex)
+//     }
+// })
 
-//FIM DO SERVER VENDAS
+// //FIM DO SERVER VENDAS
 
-//SERVER PARA REGISTRO DE COMPRA DE PRODUTOS
-server.get('/purchases', async (req, res) => {
-    try {
-        const resultado = await cliente.query("SELECT * FROM purchasesmonth")
-        const formattedResult = resultado.rows.map(row => {
-            return  {
-                ...row,
-                date: formatDate(row.date)
-            }
-        })
-        res.json(formattedResult)
-    } 
+// //SERVER PARA REGISTRO DE COMPRA DE PRODUTOS
+// server.get('/purchases', async (req, res) => {
+//     try {
+//         const resultado = await cliente.query("SELECT * FROM purchasesmonth")
+//         const formattedResult = resultado.rows.map(row => {
+//             return  {
+//                 ...row,
+//                 date: formatDate(row.date)
+//             }
+//         })
+//         res.json(formattedResult)
+//     } 
     
-    catch(ex) {
-        console.log('error server: ' +ex)
-    }
-})
+//     catch(ex) {
+//         console.log('error server: ' +ex)
+//     }
+// })
 
-server.post('/insertPurchases',  instancePurchaseValidation.createPurchaseValidation, async(req, res) => {
-    const {nameproduct, price, quantity, date} = req.body
-    try {
-        await insPurchases(nameproduct, price, quantity, date)
+// server.post('/insertPurchases',  instancePurchaseValidation.createPurchaseValidation, async(req, res) => {
+//     const {nameproduct, price, quantity, date} = req.body
+//     try {
+//         await insPurchases(nameproduct, price, quantity, date)
 
-        const newPurchase = {nameproduct, price, quantity, date}
-        purchases.push(newPurchase)
+//         const newPurchase = {nameproduct, price, quantity, date}
+//         purchases.push(newPurchase)
 
-        res.status(201).json({'message': 'Sucessfully'})
-    } 
+//         res.status(201).json({'message': 'Sucessfully'})
+//     } 
     
-    catch(ex) {
-        console.log('error server: ' +ex)
-    }
-})
+//     catch(ex) {
+//         console.log('error server: ' +ex)
+//     }
+// })
 
-server.delete('/delPurchases', instancePurchaseValidation.deletePurchaseValidation, async(req, res) => {
-    const {id} = req.body
+// server.delete('/delPurchases', instancePurchaseValidation.deletePurchaseValidation, async(req, res) => {
+//     const {id} = req.body
 
-    try {
-        await delPurchases(id)
+//     try {
+//         await delPurchases(id)
 
-        res.status(201).json({'message': 'Sucessfully'})
-    } catch(ex) {
-        console.log('error server: '+ex)
-    }
-})
+//         res.status(201).json({'message': 'Sucessfully'})
+//     } catch(ex) {
+//         console.log('error server: '+ex)
+//     }
+// })
 
 //FIM DO SERVER PRODUTOS
 process.on('SIGTERM', async () => {
@@ -170,6 +170,4 @@ process.on('SIGTERM', async () => {
     process.exit(0)
 })
 
-server.listen(port, () => {
-    console.log(`In the port ${port}`)
-})
+server.listen(port, () => console.log(`Server is running on port: ${port}`))

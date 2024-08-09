@@ -16,32 +16,20 @@ function Siderbar({fixed}) {
         navigate('/')
     }
 
-    const listPage = () => {
-        navigate('/listPage')
-    }
-
-    const registerPage = () => {
-        navigate('/registerPage')
-    }
-
-    const purchasePage = () => {
-        navigate('/purchasePage')
-    }
-
-    const performaceMonth = () => {
-        navigate('/performaceMonth')
+    const handleNavigation = (page) => {
+        navigate(page)
     }
 
     
     return (
         <div className={`siderbar ${fixed ? 'fixed' : ''}`}>
             <img src={logoMenu} className="logoMenu" />
-            <FontAwesomeIcon icon={faHouse} className="faHouse" onClick={homePage} />
+            <FontAwesomeIcon icon={faHouse} className='faHouse' onClick={homePage} />
             <div className="conteudo-sidebar">
-                <button className="btn-cadastrar" onClick={registerPage}>Cadastrar Vendas</button>
-                <button className="btn-visualizar" onClick={listPage} >Visualizar Vendas Totais</button>
-                <button className="btn-materiais" onClick={purchasePage} >Cadastrar Materiais</button>
-                <button className="btn-desempenho" onClick={performaceMonth} >Visualizar Desempenho</button>
+                <button className='btn-cadastrar' onClick={() => handleNavigation('/registerPage', 'register')}>Cadastrar Vendas</button>
+                <button className='btn-visualizar' onClick={() => handleNavigation('/listPage', 'list')} >Visualizar Vendas Totais</button>
+                <button className='btn-materiais' onClick={() => handleNavigation('/purchasePage', 'purchase')} >Cadastrar Materiais</button>
+                <button className='btn-desempenho ' onClick={() => handleNavigation('/performaceMonth', 'performace')} >Visualizar Desempenho</button>
             </div>
         </div>
     )

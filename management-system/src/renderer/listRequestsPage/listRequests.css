@@ -16,6 +16,7 @@
     flex-direction: column;
     margin: auto;
     margin-top: 10rem;
+    width: 50%;
 }
 
 .div-accordion-title {
