@@ -1,10 +1,18 @@
-import cliente from "../config/db.js";
+import { prismaClient } from "../config/db.js";
 
 export async function insRequests(client, product, price, date) {
     try {
-        const productId = Math.floor(1000 + Math.random() * 9000)
+        const productId = Math.floor(1000 + Math.random() * 9000).toString()
 
-        await cliente.query('INSERT INTO requestsmonth ("id", "client", "product", "price", "date") VALUES ($1, $2, $3, $4, $5)', [productId, client,product, price, date])
+        await prismaClient.requestsMonth.create({
+            data: {
+                id: productId,
+                client,
+                product,
+                price,
+                date,
+            },
+        })
 
         console.log('Inserido')
     }
@@ -16,7 +24,11 @@ export async function insRequests(client, product, price, date) {
 
 export async function delRequests(id) {
     try {
-        await cliente.query('DELETE FROM requestsmonth WHERE id = $1', [id])
+        await prismaClient.requestsMonth.delete({
+            where: {
+                id,
+            }
+        })
         
         console.log('Removido')
     }
@@ -29,7 +41,14 @@ export async function delRequests(id) {
 export async function upRequests(id, price) {
 
     try {
-        await cliente.query('UPDATE requestsmonth SET price = $1 WHERE id = $2', [price, id])
+        await prismaClient.requestsMonth.update({
+            where: {
+                id,
+            },
+            data: {
+                price,
+            }
+        })
         console.log('Preço Atualizado')
     }
 
