@@ -6,7 +6,7 @@ import Siderbar from '../sidebar/sidebar.jsx'
 import './registerPurchase.css'
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: import.meta.env.VITE_API_BASE_URL
 })
 
 function Registerpurchase() {
@@ -36,12 +36,30 @@ function Registerpurchase() {
         setInputPreco(value)
     }
 
+    const formatDate = (event) => {
+        let value = event.target.value
+    
+        value = value.replace(/\D/g, '')
+    
+        if (value.length > 8) {
+            value = value.slice(0, 8)
+        }
+    
+        if (value.length > 4) {
+            value = value.replace(/(\d{2})(\d{2})(\d{1,4})/, '$1/$2/$3')
+        } else if (value.length > 2) {
+            value = value.replace(/(\d{2})(\d{1,2})/, '$1/$2')
+        }
+    
+        setInputDate(value)
+    }
+
     const newPurchase = () => {
         const id = Math.floor(1000 + Math.random() * 9000)
 
         api.post('/insertPurchases', {
             id: id,
-            nameproduct: inputMaterial,
+            nameProduct: inputMaterial,
             price: inputPreco,
             quantity: inputQuantity,
             date: inputDate
@@ -53,7 +71,10 @@ function Registerpurchase() {
                 console.log(error)
             })
             
-            window.location.reload()
+            setInputMaterial('')
+            setInputPreco('')
+            setInputQuantity('')
+            setInputDate('')
     }
 
     return (
@@ -82,7 +103,7 @@ function Registerpurchase() {
 
                         <div className='inputGroup'>
                             <label>Data de compra</label>
-                            <input type="date" className='inputDate' value={inputDate} onChange={(e) => setInputDate(e.target.value)} />
+                            <input type="text" className='inputDate' value={inputDate} onChange={formatDate} />
                         </div>
                     </div>
 

@@ -1,6 +1,10 @@
 import { app, BrowserWindow, screen} from 'electron'
 import { join } from 'path'
 
+import { config } from 'dotenv'
+
+config()
+
 function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize
 
@@ -23,6 +27,9 @@ function createWindow() {
 
   if (process.env.NODE_ENV === 'development' && process.env.ELECTRON_RENDERER_URL) {
     mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
+
+    //Dev tool para erros
+    // mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
   }

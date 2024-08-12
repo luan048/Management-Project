@@ -23,6 +23,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
     "electron-updater": "^6.1.7",
     "react-router-dom": "^6.25.1"
   },
