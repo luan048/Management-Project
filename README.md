@@ -9,7 +9,7 @@ Project with interaction between Front-end and Back-end, an API, for example, a 
 
 ## 1 Install project
 
-### Install the Front-end
+## Install the Front-end
 
 ```bash
 $ cd management-system
